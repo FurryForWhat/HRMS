@@ -1,6 +1,7 @@
 package model;
 
 import java.time.LocalDate;
+import java.time.YearMonth;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,16 +15,16 @@ public class Employee {
     private Role role;
     private int positionId;
     private int departmentId;
-    private List<String> otherBenefits;
-//    private double salary;
-    private LocalDate job_startedDate;
-    private LocalDate job_endedDate;
+    private int otherBenefits;
+    private double salary;
+    private String job_startedDate;
+    private String job_endedDate;
     private List<PreExperience> experiences;
     private JobType jobType;
     private Status status;
 
     public Employee(int employeeId, String name, String email, String password, String phoneNo, String address, Role role, int positionId, int departmentId,
-                    List<String> otherBenefits, LocalDate job_startedDate, LocalDate job_endedDate,JobType jobType, Status status) {
+                    int otherBenefits,double salary, String job_startedDate, String job_endedDate,JobType jobType, Status status) {
         this.employeeId = employeeId;
         this.name = name;
         this.email = email;
@@ -34,15 +35,33 @@ public class Employee {
         this.positionId = positionId;
         this.departmentId = departmentId;
         this.otherBenefits = otherBenefits;
-//        this.salary = salary;
+        this.salary = salary;
         this.job_startedDate = job_startedDate;
         this.job_endedDate = job_endedDate;
         this.jobType = jobType;
-        this.experiences = new ArrayList<>();
+//        this.experiences = new ArrayList<>();
         this.status = status;
     }
 
+    public Employee( String name, String email, String password, String phoneNo, String address, Role role, int positionId, int departmentId,
+                    double salary, String job_startedDate, String job_endedDate,JobType jobType,int otherBenefits, Status status) {
 
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        PhoneNo = phoneNo;
+        this.address = address;
+        this.role = role;
+        this.positionId = positionId;
+        this.departmentId = departmentId;
+        this.otherBenefits = otherBenefits;
+        this.salary = salary;
+        this.job_startedDate = job_startedDate;
+        this.job_endedDate = job_endedDate;
+        this.jobType = jobType;
+//        this.experiences = new ArrayList<>();
+        this.status = status;
+    }
     public int getEmployeeId() {
         return employeeId;
     }
@@ -115,35 +134,35 @@ public class Employee {
         this.departmentId = departmentId;
     }
 
-    public List<String> getOtherBenefits() {
+    public int getOtherBenefits() {
         return otherBenefits;
     }
 
-    public void setOtherBenefits(List<String> otherBenefits) {
+    public void setOtherBenefits(int otherBenefits) {
         this.otherBenefits = otherBenefits;
     }
 
-//    public double getSalary() {
-//        return salary;
-//    }
-//
-//    public void setSalary(double salary) {
-//        this.salary = salary;
-//    }
+    public double getSalary() {
+        return salary;
+    }
 
-    public LocalDate getJob_startedDate() {
+    public void setSalary(double salary) {
+        this.salary = salary;
+    }
+
+    public String getJob_startedDate() {
         return job_startedDate;
     }
 
-    public void setJob_startedDate(LocalDate job_startedDate) {
+    public void setJob_startedDate(String job_startedDate) {
         this.job_startedDate = job_startedDate;
     }
 
-    public LocalDate getJob_endedDate() {
+    public String getJob_endedDate() {
         return job_endedDate;
     }
 
-    public void setJob_endedDate(LocalDate job_endedDate) {
+    public void setJob_endedDate(String job_endedDate) {
         this.job_endedDate = job_endedDate;
     }
 
@@ -183,7 +202,7 @@ public class Employee {
                 ", positionId=" + positionId +
                 ", departmentId=" + departmentId +
                 ", otherBenefits=" + otherBenefits +
-//                ", salary=" + salary +
+                ", salary=" + salary +
                 ", job_startedDate=" + job_startedDate +
                 ", job_endedDate=" + job_endedDate +
                 ", prevExp_id=" +  experiences+
