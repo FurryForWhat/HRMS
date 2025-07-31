@@ -1,7 +1,6 @@
 package util;
 
-import com.mysql.cj.x.protobuf.MysqlxPrepare;
-import repo.MysqlConnection;
+import model.database.MysqlConnection;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

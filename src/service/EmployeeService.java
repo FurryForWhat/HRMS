@@ -1,55 +1,29 @@
 package service;
 
 import model.Employee;
-import model.JobType;
-import model.Role;
-import model.Status;
-import repo.MysqlConnection;
+import model.database.MysqlConnection;
+import repo.EmployeeRepo;
 import util.EmployeeIndexFinder;
 
 import java.sql.*;
-import java.time.YearMonth;
-import java.util.ArrayList;
-import java.util.List;
 
 public class EmployeeService {
-    private final MysqlConnection mysqlConnection ;
-    private EmployeeIndexFinder employeeIndexFinder = null;
+    private EmployeeRepo employeeRepo;
 
-   public EmployeeService(MysqlConnection mysqlConnection){
-       this.mysqlConnection = mysqlConnection;
-       employeeIndexFinder = new EmployeeIndexFinder(this.mysqlConnection);
+   public EmployeeService(EmployeeRepo employeeRepo){
+       this.employeeRepo = employeeRepo;
 
    }
 
-    public void saveEmployee(Employee employee) throws SQLException {
-            String query = "INSERT INTO employees " +
-                    "(employee_id,name, email, password, phone_no, address, role, position_id, department_id, salary, job_started_date,job_ended_date,status,benefits_id,job_type) "+
-                    "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-            Connection newConnection = mysqlConnection.createConnection();
-            PreparedStatement preparedStatement = newConnection.prepareStatement(query);
-            employee.setEmployeeId(employeeIndexFinder.nextIndex());
-            preparedStatement.setInt(1,employee.getEmployeeId());
-            preparedStatement.setString(2,employee.getName());
-            preparedStatement.setString(3,employee.getEmail());
-            preparedStatement.setString(4,employee.getPassword());
-            preparedStatement.setString(5,employee.getPhoneNo());
-            preparedStatement.setString(6,employee.getAddress());
-            preparedStatement.setString(7,employee.getRole().name());
-            preparedStatement.setInt(8,employee.getPositionId());
-            preparedStatement.setInt(9,employee.getDepartmentId());
-            preparedStatement.setDouble(10,employee.getSalary());
-            preparedStatement.setString(11,employee.getJob_startedDate());
-            preparedStatement.setString(12,employee.getJob_endedDate());
-            preparedStatement.setString(13,employee.getStatus().name());
-            preparedStatement.setInt(14,employee.getOtherBenefits());
-            preparedStatement.setString(15,employee.getJobType().name());
-        int rowsAffected = preparedStatement.executeUpdate();
-
-        if (rowsAffected > 0) {
-            System.out.println("Data inserted successfully! ✅");
-        }
-
+    public void registerEmployee(Employee employee) {
+            try{
+                if(employee != null){
+                    employeeRepo.saveEmployee(employee);
+                }
+            }
+            catch (Exception e){
+                System.out.println(e.getStackTrace());
+            }
     }
 
     public void deleteEmployee(int employeeId) {

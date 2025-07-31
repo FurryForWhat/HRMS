@@ -1,4 +1,4 @@
-package repo;
+package model.database;
 
 import java.sql.*;
 

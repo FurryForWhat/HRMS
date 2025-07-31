@@ -81,6 +81,6 @@ public class EmployeeController {
                 System.out.println("Invalid Input");
         }
         Employee newEmployee = new Employee(uName,uEmail,uPass,uPhone,uAddr,uRole,uPosition,uDeprt,uSalary,uDate,"null",uJobType,uBenefitId,uStatus);
-        employeeService.saveEmployee(newEmployee);
+        employeeService.registerEmployee(newEmployee);
     }
 }
